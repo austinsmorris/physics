@@ -2,12 +2,20 @@ defmodule CalcsTest do
   use ExUnit.Case
   doctest Calcs
 
-  test "convert_to_km even" do
-    assert Calcs.convert_to_km(5000) == 5
+  test "km_to_m even" do
+    assert Calcs.km_to_m(5) == 5000
   end
 
-  test "convert_to_km decimal" do
-    assert Calcs.convert_to_km(1234) == 1.234
+  test "km_to_m decimal" do
+    assert Calcs.km_to_m(1.234) == 1234
+  end
+
+  test "m_to_km even" do
+    assert Calcs.m_to_km(5000) == 5
+  end
+
+  test "m_to_km decimal" do
+    assert Calcs.m_to_km(1234) == 1.234
   end
 
   test "rounded_up_to_nearest_tenth down" do
