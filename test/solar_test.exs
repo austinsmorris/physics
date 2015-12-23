@@ -20,4 +20,25 @@ defmodule SolarTests do
     assert length(flares) == 8
   end
 
+  test "Go inside!", %{data: flares} do
+    bad_flares = Solar.no_eva(flares)
+    assert length(bad_flares) == 3
+  end
+
+  test "Ouch", %{data: flares} do
+    deadliest_flare = Solar.deadliest(flares)
+    assert deadliest_flare == 99_000
+  end
+
+  test "power for X" do
+    assert Solar.power(%{classification: :X, scale: 10}) == 10_000
+  end
+
+  test "power for M" do
+    assert Solar.power(%{classification: :M, scale: 10}) == 100
+  end
+
+  test "power for C" do
+    assert Solar.power(%{classification: :C, scale: 10}) == 10
+  end
 end
