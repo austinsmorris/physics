@@ -1,21 +1,20 @@
 defmodule RocketryTest do
   use ExUnit.Case
-  doctest Physics.Rocketry
+  import Physics.Rocketry
 
-  test "escape_velocity earth" do
-    assert Physics.Rocketry.escape_velocity(:earth) == 11.2
+  test "Orbital acceleration defaults to Earth" do
+    x = orbital_acceleration(100)
+    assert x == 9.519899476599884
   end
 
-  test "escape_velocity mars" do
-    assert Physics.Rocketry.escape_velocity(:mars) == 5.1
+  test "Orbital acceleration for Jupiter" do
+    x = orbital_acceleration(Planet.select[:jupiter], 100)
+    assert x == 24.670096337229204
   end
 
-  test "escape_velocity moon" do
-    assert Physics.Rocketry.escape_velocity(:moon) == 2.4
+  test "Orbital term at 100km for Saturn at 6000km" do
+    x = orbital_term(Planet.select[:saturn], 6000)
+    assert x == 4.9
   end
 
-  test "escape_velocity planet" do
-    assert Physics.Rocketry.escape_velocity(%{mass: 1, radius: 1}) ==
-      :math.sqrt(2 * 6.67e-11) |> Calcs.m_to_km |> Calcs.rounded_up_to_nearest_tenth
-  end
 end
