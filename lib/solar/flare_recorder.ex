@@ -27,7 +27,7 @@ defmodule Solar.FlareRecorder do
     insert into solar_flares(classification, scale, date)
     values($1, $2, now()) RETURNING *;
     """
-    |> execute([Atom.to_string(flare.classification), flare.scale])
+    |> execute([flare.classification, flare.scale])
   end
 
   defp connect do
@@ -35,11 +35,13 @@ defmodule Solar.FlareRecorder do
   end
 
   defp execute(sql, params \\ []) do
-    {:ok, pid} = connect
-
-    result = Postgrex.Connection.query!(pid, sql, params) |> transform_result
-    Postgrex.Connection.stop(pid)
-    result
+    case connect do
+      {:ok, pid} ->
+        result = Postgrex.Connection.query!(pid, sql, params) |> transform_result
+        Postgrex.Connection.stop(pid)
+      {:error, err} ->
+        {:error, err.message}
+    end
   end
 
   defp get_flares do

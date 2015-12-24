@@ -24,7 +24,7 @@ defmodule PGTest do
     """
     res = Postgrex.Connection.query!(pid, sql, []) |> transform_result
 
-    IO.inspect res
+    # IO.inspect res
     Postgrex.Connection.stop(pid)
   end
 
