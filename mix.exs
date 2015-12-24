@@ -14,7 +14,7 @@ defmodule Physics.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :tzdata]]
+    [applications: [:logger, :postgrex, :tzdata]]
   end
 
   # Dependencies can be Hex packages:
@@ -29,7 +29,8 @@ defmodule Physics.Mixfile do
   defp deps do
     [
       {:timex, "~> 1.0.0-rc4"},
-      {:amnesia, github: "meh/amnesia", tag: :master}
+      {:amnesia, github: "meh/amnesia", tag: :master},
+      {:postgrex, "~> 0.10"}
     ]
   end
 end
