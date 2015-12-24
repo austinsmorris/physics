@@ -7,7 +7,7 @@ defmodule CalcsTest do
   end
 
   test "to_m decimal" do
-    assert Calcs.to_m (1.234) == 1234
+    assert Calcs.to_m(1.234) == 1234
   end
 
   test "to_km even" do
